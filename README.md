@@ -66,9 +66,8 @@ I hope this library allows you to create some happiness.  Enjoy!
 
 ## Usage
 
-The library is just coming together, so expect change.  There are two
-main ways to use the code.  If you want the latest code or are just
-exploring what shadertone can do, you should clone the repo from
+There are two main ways to use the code.  If you want the latest code or are 
+just exploring what shadertone can do, you should clone the repo from
 github.  But, if you have a project idea and want to use shadertone as
 part of that project, you can specify the current version in your
 Leiningen project.clj to download the library from clojars.

@@ -721,16 +721,19 @@
 
 (defn- run-thread
   [locals mode shader-filename shader-str-atom tex-filenames title true-fullscreen? user-fn display-sync-hz]
-  (init-window locals mode title shader-filename shader-str-atom tex-filenames true-fullscreen? user-fn display-sync-hz)
-  (init-gl locals)
-  (while (and (= :yes (:active @locals))
-              (not (Display/isCloseRequested)))
-    (update-and-draw locals)
-    (Display/update)
-    (Display/sync (:display-sync-hz @locals)))
-  (destroy-gl locals)
-  (Display/destroy)
-  (swap! locals assoc :active :no))
+  (try
+    (init-window locals mode title shader-filename shader-str-atom tex-filenames true-fullscreen? user-fn display-sync-hz)
+    (init-gl locals)
+    (while (and (= :yes (:active @locals))
+                (not (Display/isCloseRequested)))
+      (update-and-draw locals)
+      (Display/update)
+      (Display/sync (:display-sync-hz @locals)))
+    (destroy-gl locals)
+    (Display/destroy)
+    (swap! locals assoc :active :no)
+    (catch Throwable t
+      (println t))))
 
 (defn- good-tex-count
   [textures]

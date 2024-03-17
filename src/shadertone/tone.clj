@@ -124,8 +124,8 @@
     (do
       (if (buffer-live? wave-buf) ;; FIXME? assume fft-buf is live
         (-> ^FloatBuffer fftwave-float-buf
-            (.put ^floats (buffer-data fft-buf))
-            (.put ^floats (buffer-data wave-buf))
+            (.put ^floats (buffer-read fft-buf))
+            (.put ^floats (buffer-read wave-buf))
             (.flip)))
       (GL13/glActiveTexture (+ GL13/GL_TEXTURE0 @fftwave-tex-num))
       (GL11/glBindTexture GL11/GL_TEXTURE_2D @fftwave-tex-id)
